@@ -1,0 +1,23 @@
+---
+
+- name: Install Unbound packages
+  tags: unbound
+  apt:
+    name: "{{ packages }}"
+  vars:
+   packages:
+     - unbound
+
+- name: Deploy config for unbound
+  tags: unbound
+  template:
+    src: "{{ item }}"
+    dest: "/etc/unbound/{{ item }}"
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  notify: restart unbound
+  with_items:
+    - unbound.conf.d/dns64.conf
+  when: dns64Enabled == True
+
