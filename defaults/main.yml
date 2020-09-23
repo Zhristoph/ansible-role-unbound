@@ -1,1 +1,14 @@
+dhcpInterfaces: []
 dns64Enabled: True
+
+## Example
+#dhcpInterfaces: 
+#  - networkName: footCLAN
+#    macAddress: 52:54:00:42:c9:7b
+#    ipAddresses: [ 172.16.30.1/24, ]
+#    nat: [ 172.16.30.0/24, ]
+#  - networkName: headCLAN
+#    macAddress: 52:54:00:98:5f:06
+#    ipAddresses: [ 172.29.1.1/24, ]
+#    nat: [ 172.29.1.0/24, ]
+
