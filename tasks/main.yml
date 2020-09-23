@@ -9,12 +9,12 @@
      - unbound
 
 - name: Basic unbound config files
-  tags: unbound, test
+  tags: unbound
   set_fact:
     unboundConfig: unbound.conf.d/access.conf
 
 - name: Add DNS64 to unbound config list
-  tags: unbound, test
+  tags: unbound
   set_fact:
     unboundConfig:
     - "{{ unboundConfig }}"
@@ -22,7 +22,7 @@
   when: dns64Enabled == True
 
 - name: Deploy config for unbound
-  tags: unbound, test
+  tags: unbound
   template:
     src: "{{ item }}"
     dest: "/etc/unbound/{{ item }}"
