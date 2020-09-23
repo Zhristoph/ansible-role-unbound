@@ -8,8 +8,21 @@
    packages:
      - unbound
 
+- name: Basic unbound config files
+  tags: unbound, test
+  set_fact:
+    unboundConfig: unbound.conf.d/access.conf
+
+- name: Add DNS64 to unbound config list
+  tags: unbound, test
+  set_fact:
+    unboundConfig:
+    - "{{ unboundConfig }}"
+    - unbound.conf.d/dns64.conf
+  when: dns64Enabled == True
+
 - name: Deploy config for unbound
-  tags: unbound
+  tags: unbound, test
   template:
     src: "{{ item }}"
     dest: "/etc/unbound/{{ item }}"
@@ -18,6 +31,5 @@
     mode: "u=rw,g=r,o=r"
   notify: restart unbound
   with_items:
-    - unbound.conf.d/dns64.conf
-  when: dns64Enabled == True
+    - "{{ unboundConfig }}"
 
