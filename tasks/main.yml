@@ -11,14 +11,15 @@
 - name: Basic unbound config files
   tags: unbound
   set_fact:
-    unboundConfig: unbound.conf.d/access.conf
+    unboundConfig:
+     - unbound.conf.d/access.conf
+    unboundDNS64Config:
+    - unbound.conf.d/dns64.conf
 
 - name: Add DNS64 to unbound config list
   tags: unbound
   set_fact:
-    unboundConfig:
-    - "{{ unboundConfig }}"
-    - unbound.conf.d/dns64.conf
+    unboundConfig: "{{ unboundConfig + unboundDNS64Config }}"
   when: dns64Enabled == True
 
 - name: Deploy config for unbound
