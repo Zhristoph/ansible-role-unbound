@@ -20,7 +20,7 @@
   tags: unbound
   set_fact:
     unboundConfig: "{{ unboundConfig + unboundDNS64Config }}"
-  when: dns64Enabled == True
+  when: dns64Enabled
 
 - name: Deploy config for unbound
   tags: unbound
