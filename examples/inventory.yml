@@ -1,0 +1,17 @@
+all:
+  hosts:
+  children:
+    firewall:
+      children:
+        statefulfw:
+        statelessfw:
+    statefulfw:
+      hosts:
+        firewalledge01:
+        firewalledge02:
+      vars:
+        taygaInterface: "nat64"
+    statelessfw:
+      hosts:
+        firewalluplink01:
+        firewalluplink02:

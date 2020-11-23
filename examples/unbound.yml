@@ -1,0 +1,15 @@
+- name: Firewall
+  hosts: firewall
+  become: yes
+  gather_facts: no
+  roles:
+    - firewall
+
+- name: StatefulFirewalls
+  hosts: statefulfw
+  become: yes
+  gather_facts: no
+  roles:
+    - unbound
+    - tayga
+    - kea_dhcp_server
